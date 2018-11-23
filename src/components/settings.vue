@@ -7,7 +7,7 @@
     new password confirmation
     <input v-model="confirmed_new_password" placeholder="Confirm your new password" type="password">
     <br /><br />
-    <router-link v-bind:to="'/settings'"><button>Change</button></router-link>
+    <router-link v-bind:to="'/dashboard'"><button>Change</button></router-link>
   </div>
 </template>
 
