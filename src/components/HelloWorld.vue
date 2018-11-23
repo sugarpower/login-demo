@@ -10,7 +10,7 @@
       <br />
       <!--just a demo button-->
       <!--TODO: router will be set up later-->
-      <router-link v-bind:to="'dashboard'"><button>Login</button></router-link>
+      <router-link v-bind:to="'/dashboard'"><button>Login</button></router-link>
     </div>
     <br />
     <div>
@@ -18,7 +18,7 @@
       <br />
       <!--just a demo button-->
       <!--TODO: router will be set up later-->
-      <router-link v-bind:to="'dashboard'"><button>Signup</button></router-link>
+      <router-link v-bind:to="'/signup'"><button>Signup</button></router-link>
     </div>
   </div>
 </template>
