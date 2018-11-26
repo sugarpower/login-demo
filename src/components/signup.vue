@@ -22,7 +22,7 @@
       password confirmation
       <input v-model="newUser.confirmed_password" placeholder="Your password" type="password">
       <br />
-      <input type="submit" value="Signup">
+      <router-link v-bind:to="'/'"><input type="submit" value="Signup"></router-link>
     </form>
   </div>
 </template>
