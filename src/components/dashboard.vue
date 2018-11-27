@@ -13,14 +13,36 @@
 </template>
 
 <script>
+import firebase from 'firebase'
+var usersRef = firebase.database().ref('users')
+
 export default {
   name: 'dashboard',
   data () {
     return {
       msg: 'Welcome,',
-      // TODO: change them to the first&last name of the user
       firstname: 'Jane',
       lastname: 'Dow'
+    }
+  },
+  created () {
+    var vm = this
+    var currentUser = firebase.auth().currentUser
+    if (currentUser === null) {
+      vm.$router.push({path: '/'})
+      alert('You are not logged in!')
+    } else {
+      var userEmail = currentUser.email
+      usersRef.on('value', function (snapshot) {
+        for (var userID in snapshot.val()) {
+          let user = snapshot.val()[userID]
+          if (user['email'] === userEmail) {
+            vm.firstname = user['firstname']
+            vm.lastname = user['lastname']
+            break
+          }
+        }
+      })
     }
   }
 }

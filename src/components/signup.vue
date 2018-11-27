@@ -17,10 +17,10 @@
       <input v-model="newUser.phone" placeholder="Your phone number" type="text">
       <br />
       password
-      <input v-model="newUser.password" placeholder="Your password" type="password">
+      <input v-model="password" placeholder="Your password" type="password">
       <br />
       password confirmation
-      <input v-model="newUser.confirmed_password" placeholder="Your password" type="password">
+      <input v-model="confirmed_password" placeholder="Your password" type="password">
       <br />
       <input type="submit" value="Signup">
     </form>
@@ -41,10 +41,10 @@ export default {
         firstname: '',
         lastname: '',
         email: '',
-        phone: '',
-        password: '',
-        confirmed_password: ''
-      }
+        phone: ''
+      },
+      password: '',
+      confirmed_password: ''
     }
   },
   firebase: {
@@ -52,15 +52,37 @@ export default {
   },
   methods: {
     addUser: function () {
-      usersRef.push(this.newUser)
-      this.newUser.firstname = ''
-      this.newUser.lastname = ''
-      this.newUser.email = ''
-      this.newUser.phone = ''
-      this.newUser.password = ''
-      this.newUser.confirmed_password = ''
-      alert('You have successfully signed up!')
-      this.$router.push({ path: '/' })
+      var vm = this
+      firebase.auth().createUserWithEmailAndPassword(this.newUser.email, this.password).then(function (user) {
+        // console.log(user)
+        // var userID = user.user.email
+
+        usersRef.push(vm.newUser)
+        vm.newUser.firstname = ''
+        vm.newUser.lastname = ''
+        vm.newUser.email = ''
+        vm.newUser.phone = ''
+        vm.password = ''
+        vm.confirmed_password = ''
+        alert('You have successfully signed up!')
+        vm.$router.push({ path: '/dashboard' })
+      }), function (error) {
+        // Handle Errors here.
+        var errorCode = error.code
+        var errorMessage = error.message
+        console.log(errorCode)
+        console.log(errorMessage)
+        alert(errorMessage)
+      }
+      // usersRef.push(this.newUser)
+      // this.newUser.firstname = ''
+      // this.newUser.lastname = ''
+      // this.newUser.email = ''
+      // this.newUser.phone = ''
+      // this.newUser.password = ''
+      // this.newUser.confirmed_password = ''
+      // alert('You have successfully signed up!')
+      // this.$router.push({ path: '/' })
     }
   }
 }
