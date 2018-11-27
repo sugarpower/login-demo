@@ -6,6 +6,16 @@
 </template>
 
 <script>
+import firebase from 'firebase'
+var config = {
+  apiKey: 'AIzaSyDJK9PrpiGlE4Q4FD75_hQOJmBPhrVaKE8',
+  authDomain: 'login-demo-5fc1e.firebaseapp.com',
+  databaseURL: 'https://login-demo-5fc1e.firebaseio.com',
+  projectId: 'login-demo-5fc1e',
+  storageBucket: 'login-demo-5fc1e.appspot.com',
+  messagingSenderId: '800753801457'
+}
+firebase.initializeApp(config)
 export default {
   name: 'App'
 }

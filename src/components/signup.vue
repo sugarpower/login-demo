@@ -22,22 +22,13 @@
       password confirmation
       <input v-model="newUser.confirmed_password" placeholder="Your password" type="password">
       <br />
-      <router-link v-bind:to="'/'"><input type="submit" value="Signup"></router-link>
+      <input type="submit" value="Signup">
     </form>
   </div>
 </template>
 
 <script>
 import firebase from 'firebase'
-var config = {
-  apiKey: 'AIzaSyDJK9PrpiGlE4Q4FD75_hQOJmBPhrVaKE8',
-  authDomain: 'login-demo-5fc1e.firebaseapp.com',
-  databaseURL: 'https://login-demo-5fc1e.firebaseio.com',
-  projectId: 'login-demo-5fc1e',
-  storageBucket: 'login-demo-5fc1e.appspot.com',
-  messagingSenderId: '800753801457'
-}
-firebase.initializeApp(config)
 
 var usersRef = firebase.database().ref('users')
 
@@ -45,6 +36,7 @@ export default {
   name: 'signup',
   data () {
     return {
+      msg: 'Welcome to the Signup page!',
       newUser: {
         firstname: '',
         lastname: '',
@@ -67,6 +59,8 @@ export default {
       this.newUser.phone = ''
       this.newUser.password = ''
       this.newUser.confirmed_password = ''
+      alert('You have successfully signed up!')
+      this.$router.push({ path: '/' })
     }
   }
 }
