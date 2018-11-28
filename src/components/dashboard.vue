@@ -6,7 +6,7 @@
       <router-link v-bind:to="'/settings'"><button>Settings</button></router-link>
     </div>
     <div>
-      <router-link v-bind:to="'/'"><button>Logout</button></router-link>
+      <button v-on:click="signout">Signout</button>
     </div>
   </div>
 
@@ -44,7 +44,27 @@ export default {
         }
       })
     }
+  },
+  methods: {
+    signout: function () {
+      var vm = this
+      firebase.auth().signOut()
+        .then(function () {
+          // Sign-out successful.
+          alert('You have successfully signed out!')
+        })
+        .catch(function (error) {
+          // An error happened
+          var errorCode = error.code
+          var errorMessage = error.message
+          console.log(errorCode)
+          console.log(errorMessage)
+          alert(errorMessage)
+        })
+      vm.$router.push({path: '/'})
+    }
   }
+
 }
 </script>
 
