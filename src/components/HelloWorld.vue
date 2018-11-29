@@ -1,20 +1,34 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <form id="loginform" v-on:submit.prevent="verify">
-      user email
-      <input v-model="email" placeholder="Your email here" type="email">
-      <br />
-      password
-      <input v-model="password" placeholder="Your password" type="password">
-      <br />
-      <input type="submit" value="Login">
+
+    <form id="loginform" class="container" v-on:submit.prevent="verify">
+      <div class="row">
+        <div class="form-group col-6">
+          <label for="email">user email</label>
+          <input
+            class="form-control"
+            id="email"
+            v-model="email"
+            placeholder="Your email"
+            type="email">
+        </div>
+        <div class="form-group col-6">
+          <label for="password">password</label>
+          <input
+            class="form-control"
+            id="password"
+            v-model="password"
+            placeholder="Your password"
+            type="password">
+        </div>
+      </div>
+      <input type="submit" value="Sign in">
     </form>
+
     <br />
     <div>
-      Not a user? Signup right now!
-      <br />
-      <router-link v-bind:to="'/signup'"><button>Signup</button></router-link>
+      Not a user? <router-link v-bind:to="'/signup'">Sign up</router-link> right now!
     </div>
   </div>
 </template>

@@ -1,10 +1,11 @@
 <template>
   <div class="dashboard">
     <h1>{{ msg }} {{firstname}} {{lastname}}</h1>
-    <!--TODO: the logic of users-->
+    <br />
     <div>
       <router-link v-bind:to="'/settings'"><button>Settings</button></router-link>
     </div>
+    <br />
     <div>
       <button v-on:click="signout">Signout</button>
     </div>
