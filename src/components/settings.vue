@@ -75,7 +75,7 @@ export default {
       })
     },
     validatePassword: function () {
-      this.validPassword = validator.isLength(this.password, {min: 6, max: 18})
+      this.validPassword = validator.matches(this.password, /^(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/)
     },
     confirmPassword: function () {
       if (this.validPassword && this.password === this.confirmed_password) {

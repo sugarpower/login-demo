@@ -168,10 +168,12 @@ export default {
       this.validEmail = validator.isEmail(this.newUser.email)
     },
     validatePhone: function () {
-      this.validPhone = validator.isMobilePhone(this.newUser.phone, 'en-AU')
+      // this one only checks for mobile number so no
+      // this.validPhone = validator.isMobilePhone(this.newUser.phone, 'en-AU')
+      this.validPhone = validator.matches(this.newUser.phone, /^0[1-8][\d]{8}$/)
     },
     validatePassword: function () {
-      this.validPassword = validator.isLength(this.password, {min: 6, max: 18})
+      this.validPassword = validator.matches(this.password, /^(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/)
     },
     confirmPassword: function () {
       if (this.validPassword && this.password === this.confirmed_password) {
