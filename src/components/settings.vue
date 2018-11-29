@@ -52,7 +52,7 @@ export default {
   },
   methods: {
     tryReset: function () {
-      if (this.validPassword && this.password_match){
+      if (this.validPassword && this.password_match) {
         this.resetPassword()
       } else {
         alert('Your information is invalid!')
@@ -63,7 +63,6 @@ export default {
       var currentUser = firebase.auth().currentUser
       currentUser.updatePassword(vm.password).then(function () {
         alert('Your password is successfully updated!')
-        vm.$router.push({path: '/dashboard'})
       }).catch(function (error) {
         // An error happened.
         var errorCode = error.code
@@ -71,8 +70,8 @@ export default {
         console.log(errorCode)
         console.log(errorMessage)
         alert(errorMessage)
-        // vm.$router.push({path: '/'})
       })
+      vm.$router.push({path: '/dashboard'})
     },
     validatePassword: function () {
       this.validPassword = validator.matches(this.password, /^(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/)
