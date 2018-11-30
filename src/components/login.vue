@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="login">
     <h1>{{ msg }}</h1>
 
     <form id="loginform" class="container" v-on:submit.prevent="verify">
@@ -37,7 +37,7 @@
 import firebase from 'firebase'
 
 export default {
-  name: 'HelloWorld',
+  name: 'login',
   data () {
     return {
       msg: 'Welcome to the login page!',
