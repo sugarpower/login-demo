@@ -37,12 +37,17 @@ const router = new Router({
       }
     },
     {
+      // if the user types in an illegal url
+      // redirect to the dashboard
       path: '*',
       redirect: '/dashboard'
     }
   ]
 })
 
+// Vue navigation guard
+// https://router.vuejs.org/guide/advanced/navigation-guards.html#global-guards
+// requires authentication of users on some pages (dashboard, settings)
 router.beforeEach((to, from, next) => {
   var currentUser = firebase.auth().currentUser
   var requiresAuth = to.matched.some(record => record.meta.requiresAuth)

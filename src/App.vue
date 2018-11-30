@@ -7,6 +7,7 @@
 
 <script>
 import firebase from 'firebase'
+// configeration and initialzation of firebase
 var config = {
   apiKey: 'AIzaSyDJK9PrpiGlE4Q4FD75_hQOJmBPhrVaKE8',
   authDomain: 'login-demo-5fc1e.firebaseapp.com',

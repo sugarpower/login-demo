@@ -41,6 +41,7 @@ import validator from 'validator'
 
 export default {
   name: 'settings',
+
   data () {
     return {
       msg: 'Welcome to the settings page!',
@@ -50,7 +51,9 @@ export default {
       password_match: null
     }
   },
+
   methods: {
+    // reset the password only when two fields are valid
     tryReset: function () {
       if (this.validPassword && this.password_match) {
         this.resetPassword()
@@ -58,24 +61,31 @@ export default {
         alert('Your information is invalid!')
       }
     },
+
+    // send the request to the firebase
     resetPassword: function () {
       var vm = this
       var currentUser = firebase.auth().currentUser
-      currentUser.updatePassword(vm.password).then(function () {
-        alert('Your password is successfully updated!')
-      }).catch(function (error) {
+      currentUser.updatePassword(vm.password)
+        .then(function () {
+        // if successful
+          alert('Your password is successfully updated!')
+        }).catch(function (error) {
         // An error happened.
-        var errorCode = error.code
-        var errorMessage = error.message
-        console.log(errorCode)
-        console.log(errorMessage)
-        alert(errorMessage)
-      })
+          var errorCode = error.code
+          var errorMessage = error.message
+          console.log(errorCode)
+          console.log(errorMessage)
+          alert(errorMessage)
+        })
       vm.$router.push({path: '/dashboard'})
     },
+
+    // the same validation function as the one in signup page
     validatePassword: function () {
       this.validPassword = validator.matches(this.password, /^(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/)
     },
+
     confirmPassword: function () {
       if (this.validPassword && this.password === this.confirmed_password) {
         this.password_match = true

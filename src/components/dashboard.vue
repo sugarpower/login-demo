@@ -27,12 +27,21 @@ export default {
     }
   },
   created () {
+    // change the content of the welcome message
+    // to the name of the user
     var vm = this
     var currentUser = firebase.auth().currentUser
+    // double check if the user is logged in
+    // or errors may be there
     if (currentUser === null) {
       vm.$router.push({path: '/'})
       alert('You are not logged in!')
     } else {
+      // take the email of the user as a reference
+      // to retrieve the firstname and lastname of the user
+      // in the database.
+      // I've considered using the user.providerData but
+      // it has limited fields so nope.
       var userEmail = currentUser.email
       usersRef.on('value', function (snapshot) {
         for (var userID in snapshot.val()) {
@@ -46,6 +55,7 @@ export default {
       })
     }
   },
+
   methods: {
     signout: function () {
       var vm = this

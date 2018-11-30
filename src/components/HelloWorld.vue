@@ -36,8 +36,6 @@
 <script>
 import firebase from 'firebase'
 
-// var usersRef = firebase.database().ref('users')
-
 export default {
   name: 'HelloWorld',
   data () {
@@ -47,37 +45,22 @@ export default {
       password: null
     }
   },
+
   methods: {
     verify: function () {
       var vm = this
-      firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(function (user) {
-        vm.$router.push({path: '/dashboard'})
-      }, function (error) {
+      firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+        .then(function (user) {
+          // signin successfully
+          vm.$router.push({path: '/dashboard'})
+        }).catch(function (error) {
         // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        console.log(errorCode)
-        console.log(errorMessage)
-        alert(errorMessage)
-      })
-      // 'this' would be changed by firebase functions
-      // for some reasons I don't know
-      // var vm = this
-      // var ifVerified = false
-      // usersRef.on('value', function (snapshot) {
-      //   for (var userID in snapshot.val()) {
-      //     let user = snapshot.val()[userID]
-      //     if (user['email'] === vm.email &&
-      //       user['password'] === vm.password) {
-      //       ifVerified = true
-      //       console.log('YESSSSSSSS')
-      //       vm.$router.push({path: '/dashboard'})
-      //     }
-      //   }
-      //   if (!ifVerified) {
-      //     alert('Wrong email/password')
-      //   }
-      // })
+          var errorCode = error.code
+          var errorMessage = error.message
+          console.log(errorCode)
+          console.log(errorMessage)
+          alert(errorMessage)
+        })
     }
   }
 }
